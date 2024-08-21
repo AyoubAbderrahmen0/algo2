@@ -1,0 +1,49 @@
+ALGORITHM AnalyzeSentence
+VAR
+    char : CHARACTER
+    length_counter : INTEGER
+    word_counter : INTEGER
+    vowel_counter : INTEGER
+    prev_char : CHARACTER
+
+BEGIN
+    // Initialize Counters
+    length_counter := 0
+    word_counter := 0
+    vowel_counter := 0
+    prev_char := ""
+
+    // Read characters until the period (.)
+    DO
+        // Read the character from input
+        Read(char)
+        
+        // Increment length counter
+        length_counter := length_counter + 1
+        
+        // Check if the character is a vowel
+        IF char IN ("a", "e", "i", "o", "u", "A", "E", "I", "O", "U") THEN
+            vowel_counter := vowel_counter + 1
+        END IF
+        
+        // Check for word boundary
+        IF char = " " AND prev_char != " " AND prev_char != "" THEN
+            word_counter := word_counter + 1
+        END IF
+        
+        // Update the previous character
+        prev_char := char
+
+    WHILE char != "."
+    
+    // Handle the last word if the sentence does not end with a space
+    IF prev_char != " " THEN
+        word_counter := word_counter + 1
+    END IF
+
+    // Output the results
+    Write("Length of the sentence: ", length_counter)
+    Write("Number of words: ", word_counter)
+    Write("Number of vowels: ", vowel_counter)
+
+END
